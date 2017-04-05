@@ -7,7 +7,7 @@ export default {
   [ TYPES.ADD_CHATS_CONFIG ] (store, obj) {
     store.chats_config = obj
   },
-  [ TYPES.ADD_ARGUMENTS_USER ] (store, obj) {
+  [ TYPES.ADD_CHATS ] (store, obj) {
     store.chats = obj
   },
   [ TYPES.HAS_LOGGED ] (store, state) {

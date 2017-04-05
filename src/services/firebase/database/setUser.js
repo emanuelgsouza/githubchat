@@ -1,16 +1,16 @@
 import database from './database'
 import checkExistUser from './checkExistUser'
-import createUser from './factories'
+import { createUser } from './factories'
 import { setUserStorage, setHasLogged } from '../../../helpers'
 import store from '../../../store'
 
 const setUser = user => {
   const created = new Date().getTime()
   database
-    .ref(`users/${usuario.uid}`)
+    .ref(`users/${user.uid}`)
     .set(createUser(user, created))
     .then(() => {
-      store.dispatch('setUser', usuario)
+      store.dispatch('setUser', user)
       setHasLogged(true)
       console.log('User insert in database success and storage in localStorage')
     })
