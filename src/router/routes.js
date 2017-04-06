@@ -1,4 +1,4 @@
-import Home from '../components/Hello'
+import Home from '../view/Home'
 
 export default [
   {
