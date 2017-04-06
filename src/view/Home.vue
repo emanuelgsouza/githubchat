@@ -15,17 +15,27 @@
       <span class="icon"> <i class="fa fa-github"></i> </span>
       <span> Entre com o Github </span>
     </button>
+    <router-link to="/chats" class="button is-medium" v-if="hasLogged">
+      <span class="icon"> <i class="fa fa-comments" aria-hidden="true"></i> </span>
+      <span> Acesse seus chats </span>
+    </router-link>
   </div>
 </template>
 
 <script>
 import { signinGithub } from '../services/firebase/auth'
+import isEmpty from 'lodash.isempty'
 
 export default {
   name: 'home',
   methods: {
     logar () {
       signinGithub()
+    }
+  },
+  computed: {
+    hasLogged () {
+      return isEmpty(this.use)
     }
   }
 }
@@ -54,6 +64,7 @@ export default {
   border: 2px solid #333;
   outline: none;
   transition: all .4s ease;
+  margin: .2em;
 }
 
 .button:hover {
