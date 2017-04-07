@@ -19,6 +19,10 @@
       <span class="icon"> <i class="fa fa-comments" aria-hidden="true"></i> </span>
       <span> Acesse seus chats </span>
     </router-link>
+    <router-link to="/profile" class="button is-medium" v-if="hasLogged">
+      <span class="icon"> <i class="fa fa-user" aria-hidden="true"></i> </span>
+      <span> Meu perfil </span>
+    </router-link>
   </div>
 </template>
 
