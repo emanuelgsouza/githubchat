@@ -2,7 +2,9 @@
   <div id="app">
     <header class="hero is-medium">
       <p class="title has-text-centered">
-        <a href="http://emanuelgdev.com.br/githubchat/"> GithubChat </a>
+        <router-link to="/">
+          GithubChat
+        </router-link>
       </p>
     </header>
     <router-view></router-view>
@@ -24,14 +26,15 @@ export default {
 }
 </script>
 
-<style scoped>
-.hero, footer {
-  background-color: #333;
-  padding: 1.5em;
-}
+<style lang="sass">
+@import "./assets/sass/app.sass"
+
+.hero,
+footer
+  background-color: #333
+  padding: 1.5em
 
 .hero .title a:hover,
-footer .subtitle a:hover {
-  color: #FFF;
-}
+footer .subtitle a:hover
+  color: #FFF
 </style>

@@ -35,7 +35,7 @@ export default {
   },
   computed: {
     hasLogged () {
-      return isEmpty(this.use)
+      return !isEmpty(this.$store.state.user)
     }
   }
 }
