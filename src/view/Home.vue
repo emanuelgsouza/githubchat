@@ -11,7 +11,7 @@
     <h1 class="title"> GithubChat </h1>
     <hr>
     <p class="subtitle"> Olá. Este site foi feito para a palestra Vue.js e Firebase, apresentada no GDG de Duque de Caxias. Todas as funções são experimentais, sendo o intuito do projeto, demonstrar como se trabalhar com Firebase e Vue.js </p>
-    <button class="button is-medium" @click="logar">
+    <button class="button is-medium" @click="logar" v-if="!hasLogged">
       <span class="icon"> <i class="fa fa-github"></i> </span>
       <span> Entre com o Github </span>
     </button>
