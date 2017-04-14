@@ -1,9 +1,9 @@
 <template>
   <div class="block-users">
-    <router-link to="/">
+    <router-link :to="`/dashboard/chats/${user.uid}`">
       <Avatar :url="user.photo" />
     </router-link>
-    <router-link to="/">
+    <router-link :to="`/dashboard/chats/${user.uid}`">
       <p class="subtitle"> {{ user.name }} </p>
     </router-link>
     <button

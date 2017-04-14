@@ -13,6 +13,8 @@
     "bulma": "^0.3.1",
     "firebase": "^3.6.9",
     "lodash.isempty": "^4.4.0",
+    "moment": "^2.18.1",
+    "v-bar": "^2.0.0",
     "vue": "^2.2.2",
     "vue-router": "^2.2.0",
     "vuefire": "^1.4.0",

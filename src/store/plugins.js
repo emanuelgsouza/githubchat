@@ -15,7 +15,7 @@ const initializeApp = store => {
     referenceUser
       .child('chats')
       .on('value', function addArgument (data) {
-        dispatchAction(data, 'addDeck')
+        dispatchAction(data, 'addChats')
       })
   })
 }

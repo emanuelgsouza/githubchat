@@ -1,8 +1,9 @@
 import database from './database'
 import { createMsg } from './factories'
+import { returnKey } from './helpers'
 
-export default (text, uid, uidMsg) => {
-  const refMsg = database.ref('messages').child(uidMsg)
-  const idMsg = refMsg.push().key
-  return refMsg.chil(idMsg).set(createMsg(text, uid))
+export default (text, uid, keyChat) => {
+  const refMsg = database.ref('messages').child(keyChat)
+  const keyMsg = returnKey('messages', keyChat)
+  return refMsg.child('msgs').child(keyMsg).set(createMsg(text, uid))
 }

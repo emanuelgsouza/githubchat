@@ -4,6 +4,7 @@ import Profile from '../view/Profile'
 import Chats from '../view/Chats'
 import Contatos from '../view/Contacts'
 import Search from '../view/Search'
+import Chat from '../view/Chat'
 
 export default [
   {
@@ -30,6 +31,11 @@ export default [
         component: Search
       }
     ]
+  },
+  {
+    path: '/dashboard/chats/:id',
+    name: 'Chat',
+    component: Chat
   },
   {
     path: '/profile',
