@@ -5,6 +5,7 @@ export default (user, created) => {
     photo: user.photoURL,
     email: user.email,
     created,
-    chats: {}
+    chats: {},
+    online: true
   }
 }

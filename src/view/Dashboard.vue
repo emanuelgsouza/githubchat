@@ -28,11 +28,20 @@
 </template>
 
 <script>
+import { database } from '../services/firebase/database'
+
 export default {
   computed: {
     current () {
       return this.$route.path.substring(11)
     }
+  },
+  created () {
+    database
+      .ref('users')
+      .child(this.$store.state.user.uid)
+      .child('online')
+      .set(true)
   }
 }
 </script>

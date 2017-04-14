@@ -1,7 +1,7 @@
 <template>
   <div class="block-users">
     <router-link :to="`/dashboard/chats/${user.uid}`">
-      <Avatar :url="user.photo" />
+      <Avatar :url="user.photo" :uid="user.uid"/>
     </router-link>
     <router-link :to="`/dashboard/chats/${user.uid}`">
       <p class="subtitle"> {{ user.name }} </p>

@@ -1,7 +1,7 @@
 <template>
   <div class="article">
     <header class="header">
-      <Avatar :url="user.photo" />
+      <Avatar :url="user.photo" :uid="user.uid" />
       <h1 class="title"> {{ user.name }} </h1>
     </header>
     <section class="section-messages">
