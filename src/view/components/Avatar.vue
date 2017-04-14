@@ -17,14 +17,11 @@ export default {
   },
   mounted () {
     setTimeout(_ => {
-      console.log('executando')
       database
         .ref('users')
         .child(this.uid)
         .child('online')
         .on('value', snap => {
-          console.log('chegou')
-          console.log(snap.val())
           this.online = snap.val()
         })
     }, 2000)

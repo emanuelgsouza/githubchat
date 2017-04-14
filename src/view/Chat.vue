@@ -6,8 +6,10 @@
     </header>
     <section class="section-messages">
       <vBar wrapper="wrapper">
-        <Messages v-if="!isFirstMessage" :chat="chat[0]" />
-        <p v-if="writing" class="writing"> {{ user.name }} está escrevendo </p>
+        <div>
+          <Messages v-if="!isFirstMessage" :chat="chat[0]" />
+          <p v-if="writing" class="writing"> {{ user.name }} está escrevendo </p>
+        </div>
       </vBar>
       <div class="text">
         <p class="control">
@@ -192,6 +194,10 @@ export default {
     width: 100%;
     height: 55vh;
     padding: .5em 0 .3em .5em;
+  }
+
+  .wrapper > div {
+    width: 100%;
   }
 
   .writing {
