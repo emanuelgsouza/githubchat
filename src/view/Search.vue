@@ -8,7 +8,7 @@
         placeholder="Digite um nome de usuário para pesquisa">
     </p>
     <div class="article">
-      <BlockUser v-for="user in usersComputed" :user="user" />
+      <BlockUser v-for="(user, key) in usersComputed" :key="key" :user="user" />
     </div>
   </article>
 </template>
