@@ -38,4 +38,7 @@ export default {
 </script>
 
 <style scoped>
+.messages {
+  width: 100%;
+}
 </style>

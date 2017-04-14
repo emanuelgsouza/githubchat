@@ -7,6 +7,7 @@
     <section class="section-messages">
       <vBar wrapper="wrapper">
         <Messages v-if="!isFirstMessage" :chat="chat[0]" />
+        <p v-if="writing" class="writing"> {{ user.name }} está escrevendo </p>
       </vBar>
       <div class="text">
         <p class="control">
@@ -15,6 +16,7 @@
             class="textarea"
             v-model="message"
             placeholder="Escreva uma mensagem"
+            @blur="removeWriting"
             @keydown.enter="sendMessage"></textarea>
         </p>
         <button class="button is-success" @click="sendMessage"> ENVIAR </button>
@@ -41,10 +43,40 @@ export default {
   data () {
     return {
       user: {},
-      message: ''
+      message: '',
+      writingOwn: false,
+      writing: false
+    }
+  },
+  watch: {
+    message () {
+      if (this.refChat === '') return
+      this.writingOwn = true
+      const members = this.chat[0]
+      const member = (members.member1 === this.$store.state.user.uid) ? 'member1' : 'member2'
+      database
+        .ref('chats')
+        .child(this.refChat)
+        .child('members')
+        .child(member)
+        .child('writing')
+        .set(true)
     }
   },
   computed: {
+    teste () {
+      if (this.refChat === '') return
+      const members = this.chat[0]
+      const member = (members.member1 === this.$store.state.user.uid) ? 'member2' : 'member1'
+      database
+        .ref('chats')
+        .child(this.refChat)
+        .child('members')
+        .child(member)
+        .on('value', snap => {
+          this.writing = snap.val().writing
+        })
+    },
     isFirstMessage () {
       const chats = this.$store.state.chats
       if (chats === undefined) return true
@@ -63,6 +95,7 @@ export default {
     },
     refMessage () {
       if (this.refChat !== '') return this.chat[0].refMessage
+      return ''
     }
   },
   methods: {
@@ -85,9 +118,23 @@ export default {
           })
           .catch(console.log)
         this.message = ''
+        return
       }
       setMessage(this.message, user1.uid, this.refMessage)
       this.message = ''
+    },
+    removeWriting () {
+      if (this.refChat === '') return
+      this.writingOwn = false
+      const members = this.chat[0]
+      const member = (members.member1 === this.$store.state.user.uid) ? 'member1' : 'member2'
+      database
+        .ref('chats')
+        .child(this.refChat)
+        .child('members')
+        .child(member)
+        .child('writing')
+        .set(false)
     }
   },
   mounted () {
@@ -145,5 +192,10 @@ export default {
     width: 100%;
     height: 55vh;
     padding: .5em 0 .3em .5em;
+  }
+
+  .writing {
+    margin-right: auto;
+    font-style: italic;
   }
 </style>

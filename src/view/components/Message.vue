@@ -27,6 +27,18 @@ export default {
 </script>
 
 <style scoped>
+.message {
+  width: 60%;
+}
+
+.message.own {
+  margin-left: auto;
+}
+
+.message:not(.own) {
+  margin-auto: auto;
+}
+
 .message-body {
   position: relative;
   padding-bottom: 2em;
@@ -34,6 +46,7 @@ export default {
 
 .message.own {
   text-align: right;
+  align-self: left;
 }
 
 .message.own .hour {
