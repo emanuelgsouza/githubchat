@@ -1,5 +1,5 @@
 import Home from '../view/Home'
-import Chats from '../view/Chats'
+import Chats from '../view/Dashboard'
 import Profile from '../view/Profile'
 import Conversas from '../view/Conversas'
 import Contatos from '../view/Contacts'
@@ -12,21 +12,21 @@ export default [
     component: Home
   },
   {
-    path: '/chats',
+    path: '/dashboard',
     name: 'Chats',
     component: Chats,
-    redirect: '/chats/conversas',
+    redirect: '/dashboard/chats',
     children: [
       {
-        path: '/chats/conversas',
+        path: '/dashboard/chats',
         component: Conversas
       },
       {
-        path: '/chats/contacts',
+        path: '/dashboard/contacts',
         component: Contatos
       },
       {
-        path: '/chats/search',
+        path: '/dashboard/search',
         component: Search
       }
     ]

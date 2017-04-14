@@ -15,7 +15,7 @@
       <span class="icon"> <i class="fa fa-github"></i> </span>
       <span> Entre com o Github </span>
     </button>
-    <router-link to="/chats" class="button is-medium" v-if="hasLogged">
+    <router-link to="/dashboard" class="button is-medium" v-if="hasLogged">
       <span class="icon"> <i class="fa fa-comments" aria-hidden="true"></i> </span>
       <span> Acesse seus chats </span>
     </router-link>
