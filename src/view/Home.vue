@@ -23,11 +23,15 @@
       <span class="icon"> <i class="fa fa-user" aria-hidden="true"></i> </span>
       <span> Meu perfil </span>
     </router-link>
+    <button class="button is-medium" @click="logout" v-if="hasLogged">
+      <span class="icon"> <i class="fa fa-sign-out" aria-hidden="true"></i> </span>
+      <span> Sair </span>
+    </button>
   </div>
 </template>
 
 <script>
-import { signinGithub } from '../services/firebase/auth'
+import { signinGithub, signOut } from '../services/firebase/auth'
 import isEmpty from 'lodash.isempty'
 
 export default {
@@ -35,6 +39,9 @@ export default {
   methods: {
     logar () {
       signinGithub()
+    },
+    logout () {
+      signOut()
     }
   },
   computed: {
@@ -45,7 +52,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .content {
   padding: 1em;
