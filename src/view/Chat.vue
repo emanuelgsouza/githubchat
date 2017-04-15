@@ -33,6 +33,7 @@ import {
   setFirstMessage,
   setChat,
   setChatInUser,
+  setChatInUserFirst,
   setMessage
 } from '../services/firebase/database'
 import Avatar from './components/Avatar'
@@ -47,7 +48,8 @@ export default {
       user: {},
       message: '',
       writingOwn: false,
-      writing: false
+      writing: false,
+      member: ''
     }
   },
   watch: {
@@ -63,22 +65,21 @@ export default {
         .child(member)
         .child('writing')
         .set(true)
-    }
-  },
-  computed: {
-    teste () {
-      if (this.refChat === '') return
-      const members = this.chat[0]
-      const member = (members.member1 === this.$store.state.user.uid) ? 'member2' : 'member1'
+    },
+    refChat () {
+      if (this.member === '') return
       database
         .ref('chats')
         .child(this.refChat)
         .child('members')
-        .child(member)
+        .child(this.member)
         .on('value', snap => {
+          console.log('changed')
           this.writing = snap.val().writing
         })
-    },
+    }
+  },
+  computed: {
     isFirstMessage () {
       const chats = this.$store.state.chats
       if (chats === undefined) return true
@@ -98,10 +99,16 @@ export default {
     refMessage () {
       if (this.refChat !== '') return this.chat[0].refMessage
       return ''
+    },
+    member () {
+      if (this.refChat === '') return
+      const members = this.chat[0]
+      return (members.member1 === this.$store.state.user.uid) ? 'member2' : 'member1'
     }
   },
   methods: {
     sendMessage () {
+      if (this.message === '') return
       const user1 = this.$store.state.user
       const user2 = this.user
       if (this.isFirstMessage) {
@@ -114,7 +121,7 @@ export default {
             chat
               .created()
               .then(_ => {
-                setChatInUser(user1.uid, user2.uid, chat.refChat, keyChat)
+                setChatInUserFirst(user1.uid, user2.uid, chat.refChat, keyChat)
               })
               .catch(console.log)
           })
@@ -122,19 +129,17 @@ export default {
         this.message = ''
         return
       }
+      setChatInUser(user1.uid, user2.uid, this.refChat, this.refMessage)
       setMessage(this.message, user1.uid, this.refMessage)
       this.message = ''
     },
     removeWriting () {
-      if (this.refChat === '') return
-      this.writingOwn = false
-      const members = this.chat[0]
-      const member = (members.member1 === this.$store.state.user.uid) ? 'member1' : 'member2'
+      if (this.member === '') return
       database
         .ref('chats')
         .child(this.refChat)
         .child('members')
-        .child(member)
+        .child(this.member)
         .child('writing')
         .set(false)
     }

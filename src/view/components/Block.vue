@@ -1,6 +1,6 @@
 <template>
   <div class="blocks">
-    <BlockUser :user="user" />
+    <BlockUser :user="user" :showdelete="true" :keyChat="keyChat" />
   </div>
 </template>
 
@@ -9,7 +9,7 @@ import { database } from '../../services/firebase/database'
 import BlockUser from './BlockUser'
 
 export default {
-  props: ['chat'],
+  props: ['chat', 'keyChat'],
   components: { BlockUser },
   data () {
     return {

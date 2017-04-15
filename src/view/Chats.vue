@@ -1,7 +1,7 @@
 <template>
   <article class="article">
     <p class="subtitle" v-if="chats === undefined"> Não há conversas registradas </p>
-    <Block v-for="(chat, key) in chats" :key="key" :chat="chat" />
+    <Block v-for="(chat, key) in chats" :keyChat="key" :chat="chat" />
   </article>
 </template>
 

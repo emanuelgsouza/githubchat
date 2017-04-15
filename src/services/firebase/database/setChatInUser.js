@@ -9,7 +9,6 @@ export default (memberUid1, memberUid2, chatUid, refMessage) => {
   }
   const updates = {}
 
-  updates[`users/${memberUid1}/chats/${chatUid}`] = chat
   updates[`users/${memberUid2}/chats/${chatUid}`] = chat
   return database.ref().update(updates)
 }
