@@ -5,12 +5,10 @@
       <h1 class="title"> {{ user.name }} </h1>
     </header>
     <section class="section-messages">
-      <vBar wrapper="wrapper">
-        <div>
-          <Messages v-if="!isFirstMessage" :chat="chat[0]" />
-          <p v-if="writing" class="writing"> {{ user.name }} está escrevendo </p>
-        </div>
-      </vBar>
+      <div class="wrapper">
+        <Messages v-if="!isFirstMessage" :chat="chat[0]" />
+        <p v-if="writing" class="writing"> {{ user.name }} está escrevendo </p>
+      </div>
       <div class="text">
         <p class="control">
           <textarea
@@ -161,6 +159,7 @@ export default {
     display: flex;
     align-items: center;
     width: 100%;
+    height: 20%;
     border-bottom: 1px solid black;
   }
 
@@ -170,13 +169,12 @@ export default {
 
   .section-messages {
     position: relative;
-    height: calc(100vh - 228px);
+    height: 80%;
   }
 
   .text {
     width: 100%;
-    position: absolute;
-    bottom: 0;
+    height: 15%;
     display: flex;
     align-items: center;
   }
@@ -197,8 +195,10 @@ export default {
 
   .wrapper {
     width: 100%;
-    height: 55vh;
-    padding: .5em 0 .3em .5em;
+    height: 85%;
+    overflow-y: scroll;
+    display: flex;
+    padding: .5em;
   }
 
   .wrapper > div {

@@ -22,5 +22,11 @@ export default {
 <style scoped>
   .article {
     padding: 1em;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .article .blocks {
+    flex-grow: 1;
   }
 </style>

@@ -32,7 +32,7 @@ export default {
 .hero,
 footer
   background-color: #333
-  padding: 1.5em
+  padding: 1em
 
 .hero .title a:hover,
 footer .subtitle a:hover

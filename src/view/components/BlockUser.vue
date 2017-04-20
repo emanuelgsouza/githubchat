@@ -1,16 +1,23 @@
 <template>
   <div class="block-users">
-    <router-link :to="`/dashboard/chats/${user.uid}`">
-      <Avatar :url="user.photo" :uid="user.uid"/>
-    </router-link>
-    <router-link :to="`/dashboard/chats/${user.uid}`">
-      <p class="subtitle"> {{ user.name }} </p>
-    </router-link>
-    <button
-      class="button"
-      @click="addContact(user.uid)"
-      v-if="!contacts[user.uid]"> Adicionar ao contato </button>
-    <button class="button is-danger" v-if="showdelete" @click="deleteChat"> Deletar conversa </button>
+    <div class="link-group">
+      <router-link :to="`/dashboard/chats/${user.uid}`">
+        <Avatar :url="user.photo" :uid="user.uid"/>
+      </router-link>
+      <router-link :to="`/dashboard/chats/${user.uid}`">
+        <p class="subtitle"> {{ user.name }} </p>
+      </router-link>
+    </div>
+    <div class="button-group">
+      <button
+        class="button"
+        @click="addContact(user.uid)"
+        v-if="showButtonAddContact"> Adicionar ao contato </button>
+      <button
+        class="button is-danger"
+        v-if="showdelete"
+        @click="deleteChat"> Deletar conversa </button>
+    </div>
   </div>
 </template>
 
@@ -26,6 +33,15 @@ export default {
       const contacts = this.$store.state.user.contacts
       if (contacts === undefined) return {}
       return contacts
+    },
+    own () {
+      if (this.user.uid === this.$store.state.user.uid) return true
+      return false
+    },
+    showButtonAddContact () {
+      if (this.own) return false
+      if (this.contacts[this.user.uid]) return false
+      return true
     }
   },
   methods: {
@@ -40,15 +56,17 @@ export default {
 .block-users {
   display: flex;
   align-items: center;
-  margin: 1em;
+  margin: 1em 0;
   cursor: pointer;
 }
 
 .block-users .subtitle {
-  margin: 0 1em;
+  margin: 1em 0;
 }
 
-.button.is-danger {
-  margin-left: 1em;
+.button {
+  display: block;
+  width: 100%;
+  margin: 0.5em;
 }
 </style>

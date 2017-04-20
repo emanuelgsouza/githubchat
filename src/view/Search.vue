@@ -7,8 +7,11 @@
         v-model="search"
         placeholder="Digite um nome de usuário para pesquisa">
     </p>
-    <div class="article">
+    <div class="results" v-if="search !== ''">
       <BlockUser v-for="(user, key) in usersComputed" :key="key" :user="user" />
+    </div>
+    <div class="results" v-if="search === '' && hasOnline">
+      <BlockUser v-for="(user, key) in online" :key="key" :user="user" />
     </div>
   </article>
 </template>
@@ -26,10 +29,15 @@ export default {
   },
   firebase () {
     return {
-      users: database.ref('users')
+      users: database.ref('users'),
+      online: database.ref('users').orderByChild('online').equalTo(true)
     }
   },
   computed: {
+    hasOnline () {
+      // if (this.online.length === 1) return false
+      return true
+    },
     usersComputed () {
       if (this.search === '') return {}
       return this.users.filter(user => user.name.indexOf(this.search) !== -1)
@@ -46,5 +54,14 @@ export default {
 <style scoped>
 .article {
   padding: 1em;
+}
+
+.results {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.results .block-users {
+  flex-grow: 1;
 }
 </style>
