@@ -5,9 +5,9 @@
       <h1 class="title"> {{ user.name }} </h1>
     </header>
     <section class="section-messages">
-      <div class="wrapper">
+      <div class="wrapper" :class="{ 'active' : writing }">
         <Messages v-if="!isFirstMessage" :chat="chat[0]" />
-        <p v-if="writing" class="writing"> {{ user.name }} está escrevendo </p>
+        <!-- <p v-if="writing" class="writing"> {{ user.name }} está escrevendo </p> -->
       </div>
       <div class="text">
         <p class="control">
@@ -46,8 +46,7 @@ export default {
       user: {},
       message: '',
       writingOwn: false,
-      writing: false,
-      member: ''
+      writing: false
     }
   },
   watch: {
@@ -199,6 +198,7 @@ export default {
     overflow-y: scroll;
     display: flex;
     padding: .5em;
+    position: relative;
   }
 
   .wrapper > div {
@@ -206,6 +206,9 @@ export default {
   }
 
   .writing {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     margin-right: auto;
     font-style: italic;
   }
